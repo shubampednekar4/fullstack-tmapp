@@ -1,21 +1,19 @@
 import { useState, useContext } from 'react'
-import { AuthContext } from './context/authContext';
-import { BrowserRouter,  Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
-import PublicLayout from './layout/PublicLayout';
-import PrivateLayout from './layout/PrivateLayout';
-import Login from './pages/Login';
+import PublicLayout from './layout/PublicLayout'
+import Login from './pages/Login'
+import PrivateLayout from './layout/PrivateLayout'
 
 function App() {
-  const  { user } = useContext(AuthContext)
   return (
     <BrowserRouter>
-      <Routes >
+      <Routes>
         <Route element={<PublicLayout/>}>
-          <Route path='/login' element={<Login/>}/>
+          <Route path='login' element={<Login/>} index={true} />
         </Route>
         <Route element={<PrivateLayout/>}>
-          <Route path='/dashboard' element={<h2>Dashboard</h2>}/>
+          <Route path="dashboard" element={<h3>Dashboard</h3>}/>
         </Route>
       </Routes>
     </BrowserRouter>

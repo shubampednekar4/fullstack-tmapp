@@ -1,24 +1,24 @@
-import axios from 'axios';
+import axios from "axios";
 export const api = axios.create({
     baseURL : '/api',
     headers : {
-        'Content-Type' : 'application/json'
+        "Content-Type": 'application/json'
     }
 })
 
 api.interceptors.request.use(config => {
-    if(localStorage.getItem('token')){
-        config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+    const token = localStorage.getItem('token');
+    if(token){
+        config.headers.Authorization = `Bearer ${token}`
     }
     return config;
 })
 
 api.interceptors.response.use(
-    res=>res,
+    res => res,
     err => {
-        console.log('api errpr',err)
-        if(err.response.status === 401){
-            window.location.href = '/home'
+        if(err.response.code === 401){
+            window.location.href = '/login'
         }
         return Promise.reject(err)
     }
