@@ -1,11 +1,19 @@
 import React from 'react'
 import { Button, Checkbox, Input, Form } from 'antd'
-
+import useAuth from '../hooks/useAuth'
+import { Navigate, useNavigate } from 'react-router-dom'
 const Login = () => {
-    const onFinish =(values) => {
-        console.log(values);
+    const { login , loading, error} = useAuth();
+    const navigate = useNavigate();
+    const onFinish =async (values) => {
+        const data = await login(values);
+        if(data.status){
+            console.log('going inside',data)
+            navigate('/dashboard')
+               }
     }
   return (
+    loading ? <h2>Loading...</h2>:(
       <Form
     name="Login"
     labelCol={{ span: 8 }}
@@ -42,6 +50,7 @@ const Login = () => {
     </Form.Item>
   </Form>
   )
+)
 }
 
 export default Login

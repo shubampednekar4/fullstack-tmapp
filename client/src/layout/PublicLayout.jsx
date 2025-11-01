@@ -6,7 +6,7 @@ const PublicLayout = () => {
   return (
     <>
         <Row justify='end'>
-        <Col span={8}>
+        <Col span={4}>
             <Topmenu/>
         </Col>
     </Row>

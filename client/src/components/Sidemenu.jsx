@@ -4,7 +4,7 @@ import { AppstoreAddOutlined } from '@ant-design/icons'
 const items = [
       {
     key: 'sub2',
-    label: 'Navigation Two',
+    label: 'Home',
     icon: <AppstoreAddOutlined />,
     children: [
       { key: '5', label: 'Option 5' },
@@ -20,8 +20,8 @@ const items = [
     ],
   },
         {
-    key: 'sub3',
-    label: 'Navigation Two',
+    key: 'sub4',
+    label: 'About Us',
     icon: <AppstoreAddOutlined />,
         }
 ]

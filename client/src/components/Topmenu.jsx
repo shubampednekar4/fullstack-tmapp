@@ -1,37 +1,31 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Menu } from 'antd'
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-
+import { AppstoreOutlined, MailOutlined, ProfileFilled, ProfileOutlined, SettingOutlined } from '@ant-design/icons';
+import { AuthContext } from '../context/authContext';
+import { useNavigate } from 'react-router-dom';
     const items = [
          {
-    label: 'Navigation Three - Submenu',
-    key: 'SubMenu',
-    icon: <SettingOutlined />,
+    label: 'Profile',
+    key: 'profile',
+    icon: <ProfileOutlined />,
     children: [
-      {
-        type: 'group',
-        label: 'Item 1',
-        children: [
-          { label: 'Option 1', key: 'setting:1' },
-          { label: 'Option 2', key: 'setting:2' },
+          { label: 'Contact Us', key: 'contactus' },
+          { label: 'Logout', key: 'logout' },
         ],
-      },
-      {
-        type: 'group',
-        label: 'Item 2',
-        children: [
-          { label: 'Option 3', key: 'setting:3' },
-          { label: 'Option 4', key: 'setting:4' },
-        ],
-      },
-    ],
   },
     ]
 
 const Topmenu = () => {
     const [current , setCurrent ] = useState('SubMenu')
+    const { logout } = useContext(AuthContext)
+    const navigate = useNavigate();
     const handleChange = (e) => {
-        setCurrent(e.key)
+        if(e.key === 'logout'){
+            logout();
+        }
+        if(e.key === 'contactus'){
+            navigate('/contactus');
+        }
     }
   return (
     <Menu items={items} selectedKeys={[current]} mode='horizontal' onClick={handleChange} />

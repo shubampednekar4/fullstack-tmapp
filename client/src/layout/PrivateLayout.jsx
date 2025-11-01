@@ -8,17 +8,17 @@ const PrivateLayout = () => {
     const { user , loading} = useContext(AuthContext)
   return (
     <>
-    <Row justify='end'>
-        <Col span={8}>
+    <Row justify='end' align='middle'>
+        <Col span={4}>
             <Topmenu/>
         </Col>
     </Row>
     { loading ? <div>Loading...</div> : (
         <Row>
-        <Col span={6}>
+        <Col span={4}>
         <Sidemenu/>
         </Col>
-        <Col span={18}>
+        <Col span={20}>
           {user ?  <Outlet/> : <Navigate to={'login'}/> }
         </Col>
     </Row>

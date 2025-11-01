@@ -14,6 +14,8 @@ function App() {
         </Route>
         <Route element={<PrivateLayout/>}>
           <Route path="dashboard" element={<h3>Dashboard</h3>}/>
+          <Route path="contactus" element={<h3>Contact</h3>}/>
+
         </Route>
       </Routes>
     </BrowserRouter>
