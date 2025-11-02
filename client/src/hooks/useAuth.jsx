@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { loginService } from '../services/authService'
+import { loginService, registerService } from '../services/authService'
 import { AuthContext } from '../context/authContext'
 const useAuth = () => {
     const [loading, setLoading] = useState(false)
@@ -20,7 +20,25 @@ const useAuth = () => {
             setLoading(false)
         }
     }
-  return { login , loading, error}
+
+    const register = async(values) => {
+        try {
+            setLoading(true)
+            const user = await registerService(values);
+            console.log('register', user)
+            if(user.success){
+                localStorage.setItem('token', user.data._id)
+                setUser(user.data._id)
+            }
+            return user;
+        } catch (error) {
+            setError(error)
+        }
+        finally{
+            setLoading(false)
+        }
+    }
+  return { login , register,  loading, error}
 }
 
 export default useAuth

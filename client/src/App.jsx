@@ -4,6 +4,7 @@ import './App.css'
 import PublicLayout from './layout/PublicLayout'
 import Login from './pages/Login'
 import PrivateLayout from './layout/PrivateLayout'
+import Register from './pages/Register'
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
       <Routes>
         <Route element={<PublicLayout/>}>
           <Route path='login' element={<Login/>} index={true} />
+          <Route path='register' element={<Register/>} />
+
         </Route>
         <Route element={<PrivateLayout/>}>
           <Route path="dashboard" element={<h3>Dashboard</h3>}/>
