@@ -9,10 +9,12 @@ const useAuth = () => {
         try {
             setLoading(true)
         const data = await loginService(creds);
-        console.log('recieved data',data)
-            localStorage.setItem('token',data)
-            setUser(data);
-        return { message : 'login success', status : "success"}
+        if(data.success){
+            localStorage.setItem('token',data.token)
+            setUser(data.data);
+        }
+            
+        return data;
         } catch (error) {
             setError(error)
         }

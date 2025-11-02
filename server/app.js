@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(morgan('tiny'))
 
 app.use('/api/auth', router);
-app.use('/', (req,res) => {
+app.use('/',auth, (req,res) => {
     res.json({ message : 'api is  running very nicely'})
 })
 

@@ -1,8 +1,57 @@
 import { User } from "../models/user.js";
 import bcrypt from 'bcrypt'
-export const loginUser = async (req,res) => {
-    const { email, password } = req.body;
-    res.status(401).json({ message : 'Invalid creds'})
+import  jwt  from "jsonwebtoken";
+
+export const loginUser = async (req,res,next) => {
+    try {
+        const { username, password } = req.body;
+        console.log('inside login cntrl')
+
+    if(!username || !password){
+        res.status(403).json({
+            success : false,
+            message : 'username and password are required field',
+            data : null
+        })
+    }
+    
+    const user = await User.findOne({ 
+        username
+    })
+    if(!user){
+        res.status(404).json({
+            success : false,
+            message : 'user doesnt exist',
+            data : null
+        })
+    }
+    const hashpassword = user.password;
+    if(!bcrypt.compare(password, hashpassword)){
+        res.status(401).json({
+            success : false,
+            message : 'invalid creds',
+            data : null
+        })
+    }
+    const loggedin = user.toObject()
+    delete loggedin.password;
+    const token = await jwt.sign({
+        loggedin},
+    process.env.JWT_SECRET,
+{expiresIn : '1h'})
+
+    res.status(200).json({
+        success :true,
+        message : 'logged in success',
+        token : token,
+        data : loggedin
+
+    })
+    } catch (error) {
+        next(error)
+    }
+    
+
 }
 
 export const registerUser = async (req,res, next) => {

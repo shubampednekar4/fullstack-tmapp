@@ -6,12 +6,12 @@ const Login = () => {
     const { login , loading, error} = useAuth();
     const navigate = useNavigate();
     const onFinish =async (values) => {
-        const data = await login(values);
-        if(data.status){
-            console.log('going inside',data)
+          const data = await login(values)
+            if(data.success){
             navigate('/dashboard')
                }
-    }
+              }
+    
   return (
     loading ? <h2>Loading...</h2>:(
       <>
